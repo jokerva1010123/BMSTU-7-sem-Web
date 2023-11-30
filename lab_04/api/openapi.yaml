@@ -1,0 +1,573 @@
+openapi: 3.0.3
+info:
+  title: Dormitory Manager App
+  version: 1.0.0
+  description: API for app
+tags:
+  - name: Auth
+    description: Login to app.
+  - name: Room
+    description: Room.
+  - name: Student
+    description: Student.
+  - name: Thing
+    description: Thing.
+paths:
+  /api/Login:
+    post:
+      tags:
+      - Auth
+      summary: Try to log in system.
+      description: Try to log in system.
+      requestBody:
+        description: Login Parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Invalid input!
+        "401":
+          description: Wrong username or password!
+        "500":
+          description: Connect to database failed!
+  /api/Users/{username}/changePassword:
+    patch:
+      tags:
+      - Auth
+      summary: Change user's password.
+      description: Change user's password.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Username.
+          schema:
+            type: string
+            example: username
+      requestBody:
+        description: New password.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+        required: true
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Invalid input!
+        '404':
+          description: User is not found!
+        '500':
+          description: Connect to database failed! 
+  /api/logout:
+    get:
+      tags:
+      - Auth
+      summary: Log out.
+      responses:
+        '200':
+          description: OK.
+  /api/Rooms:
+    get:
+      tags:
+      - Room
+      summary: Get all rooms.
+      description: Get all informations about all rooms.
+      parameters:
+      - name: page
+        description: Page param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 1
+      - name: size
+        description: Size param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+        '500':
+          description: Connect to database failed!
+  /api/Rooms/{id_room}:
+    get:
+      tags:
+      - Room
+      summary: Get room with id_room
+      description: Get infomations about room with id_room
+      parameters:
+      - name: id_room
+        description: Id room
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: Id not found!
+        '500':
+          description: Connect to database failed!
+  /api/Students:
+    get:
+      tags: 
+      - Student
+      summary: Get all students.
+      description: Get all informations about all students.
+      parameters:
+      - name: page
+        description: Page param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 1
+      - name: size
+        description: Size param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        '500':
+          description: Connect to database failed!
+    post: 
+      tags:
+      - Student
+      summary: Add new student.
+      description: Add new student to database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newStudent'
+        required: true
+      responses: 
+        '201': 
+          description: Created.
+        '400':
+          description: Invalid input!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '422':
+          description: Login is exists!
+        '500':
+          description: Connect to database failed!
+  /api/Students/{codeStudent}:
+    get:
+      tags:
+      - Student
+      summary: Get student with codeStudent.
+      description: Get informations about student with codeStudent.
+      parameters:
+      - name: codeStudent
+        in: path
+        description: Student's code.
+        required: true
+        schema:
+          type: string
+          example: 123321
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Invalid parameters!
+        '404':
+          description: Student is not found!
+        '500':
+          description: Connect to database failed!
+    patch:
+      tags:
+      - Student
+      summary: Change student's infomations.
+      description: Change student's informations, who has codeStudent.
+      parameters:
+      - name: codeStudent
+        in: path
+        description: Student's code.
+        required: true
+        schema:
+          type: string
+          example: 123321
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateStudent'
+        required: true
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Invalid parameters!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '404':
+          description: Student is not found!
+        '500':
+          description: Connect to database failed!
+  /api/Students/{codeStudent}/changeRoom:
+    patch:
+      tags:
+      - Student
+      summary: Change student's room.
+      description: Change student's room, who has codeStudent.
+      parameters:
+      - name: codeStudent
+        in: path
+        description: Student's code.
+        required: true
+        schema:
+          type: string
+          example: 123321
+      requestBody:
+        description: 'id_room = 0 if student leaves. id_room > 1 if student will live.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateStudentRoom'
+        required: true
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Invalid parameters!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '404':
+          description: Student is not found! | Room not found!
+        '422':
+          description: 'Student is living in room! | Student is not living in dormitory!'
+        '500':
+          description: Connect to database failed!
+  /api/Things:
+    get:
+      tags:
+      - Thing
+      summary: Get all things.
+      description: Get all informations about all things.
+      parameters:
+      - name: codeStudent
+        in: query
+        description: Get student's thing
+        content:
+          application/json:
+            schema:
+              type: string
+              example: 123321
+      - name: page
+        description: Page param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 1
+      - name: size
+        description: Size param for pagination
+        in: query
+        schema:
+          type: integer
+          example: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Thing'
+        '400':
+          description: Status is empty!
+        '404':
+          description: Status is invalid!
+        '500':
+          description: Connect to database failed!
+    post:
+      tags:
+      - Thing
+      summary: Add new thing.
+      description: Add new thing to database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newThing'
+        required: true
+      responses:
+        '201':
+          description: Created.
+        '400':
+          description: Invalid input!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '422':
+          description: Thing's code is exists!
+        '500':
+          description: Connect to database failed!
+  /api/Things/{codeThing}:
+    get:
+      tags:
+      - Thing
+      summary: Get thing with codeThing.
+      description: Get informations about thing with codeThing.
+      parameters:
+      - name: codeThing
+        description: thing's code.
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 123321
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thing'
+        '400':
+          description: Empty thing's code!
+        '404':
+          description: Thing is not found!
+        '500':
+          description: Connect to database failed!
+  /api/Things/{codeThing}/changeRoom:
+    patch:
+      tags:
+      - Thing
+      summary: Change thing's room.
+      description: Change thing's room, which has codeThing.
+      parameters:
+      - name: codeThing
+        description: thing's code.
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 123321
+      requestBody:
+        description: 
+          'id_room = 1 if take thing from student. id_room > 1 if give thing to student.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateThing'
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Parameters is empty!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '404':
+          description: Thing is not found!
+        '422':
+          description: Thing is in room!
+        '500':
+          description: Connect to database failed!
+  /api/Things/{codeThing}/changeStudent:
+    patch:
+      tags:
+      - Thing
+      summary: Change  owner's thing.
+      description: Change student's thing, which has codeThing.
+      parameters:
+      - name: codeThing
+        in: path
+        description: Thing's code.
+        required: true
+        schema:
+          type: string
+          example: 123321
+      requestBody:
+        description: 'id_student = 0 if student give back. id_student > 0 if student take new.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateThingStudent'
+        required: true
+      responses:
+        '200':
+          description: OK.
+        '400':
+          description: Invalid parameters!
+        '401':
+          description: Need login!
+        '403':
+          description: Not have right!
+        '404':
+          description: Student is not found! | Thing not found!
+        '422':
+          description: Student is having thing! | Student is not having thing!
+        '500':
+          description: Connect to database failed!
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        login: 
+          type: string
+          example: username
+        password: 
+          type: string
+          example: password
+    ChangePassword:
+      type: object
+      properties:
+        newPassword:
+          type: string
+          example: newpassword
+    Room:
+      type: object
+      properties:
+        id_room:
+          type: integer
+          example: 1
+        roomNumber:
+          type: integer
+          example: 101
+        roomType:
+          type: string
+          example: Storage
+    Student:
+      type: object
+      properties:
+        id_student:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Alex
+        groupStudent:
+          type: string
+          example: IU7-74
+        codeStudent:
+          type: string
+          example: 123321
+        id_room:
+          type: integer
+          example: 1
+        dateIn:
+          type: string
+          example: Jan 12 2023
+    newStudent:
+      type: object
+      properties:
+        login:
+          type: string
+          example: username
+        password:
+          type: string
+          example: password
+        nameStudent:
+          type: string
+          example: Alex
+        groupStudent:
+          type: string
+          example: IU7-74
+        codeStudent:
+          type: string
+          example: 123321
+        dateIn:
+          type: string
+          example: Jan 1 2022
+    updateStudent:
+      type: object
+      properties:
+        nameStudent:
+          type: string
+          example: Alex
+        groupStudent:
+          type: string
+          example: IU7-74
+        codeStudent:
+          type: string
+          example: 123321
+    updateStudentRoom:
+      type: object
+      properties:
+        id_room:
+          type: integer
+          example: 2
+    Thing:
+      type: object
+      properties:
+        id_thing:
+          type: integer
+          example: 1
+        typeThing:
+          type: string
+          example: Table
+        code:
+          type: string
+          example: 123321
+        id_room:
+          type: integer
+          example: 1
+    newThing:
+      type: object
+      properties:
+        typeThing:
+          type: string
+          example: Table
+        code:
+          type: string
+          example: 123321
+        id_room:
+          type: integer
+          example: 1
+    updateThing:
+      type: object
+      properties:
+        id_room: 
+          type: integer
+          example: 1
+    updateThingStudent:
+      type: object
+      properties:
+        id_student: 
+          type: integer
+          example: 1

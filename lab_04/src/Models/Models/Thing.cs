@@ -5,7 +5,6 @@ namespace Models
 {
     public class Thing
     {
-        [Key]
         public int Id_thing { get; set; }
         public string Code { get; set; }
         public string? Type { get; set; }

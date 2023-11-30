@@ -10,7 +10,6 @@ namespace Models
     };
     public class Room
     {
-        [Key]
         public int Id_room { get; set; }
         public int Number { get; set; }
         public RoomTypes Roomtype { get; set; }  

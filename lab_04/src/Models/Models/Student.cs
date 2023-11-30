@@ -5,7 +5,6 @@ namespace Models
 {
     public class Student
     {
-        [Key]
         public int Id_student { get; set; }
         public string Name { get; set; }
         public string StudentCode { get; set;}
