@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fjVWtRskX9SkEFU6PvyEy/gGgeWJCD7bNZXL7071sCHNmc5PLpjKBUW7PWd1Sb+euIaQLFenHDV/5Xky95UWBw==",
+  "dgSpecHash": "hsebieoQ9qoIaCa0UCR9tiVsbo54xgzhOTib+R3xmnYjXJgkGVhnN8DGjkUN9NR6OFSwPCrouvpZiNnKW21JCw==",
   "success": true,
-  "projectFilePath": "E:\\BMSTU\\web\\src\\Models\\Models.csproj",
+  "projectFilePath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joker\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\joker\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",

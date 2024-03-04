@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\BMSTU\\web\\src\\Models\\Models.csproj": {}
+    "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj": {}
   },
   "projects": {
-    "E:\\BMSTU\\web\\src\\Models\\Models.csproj": {
+    "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\BMSTU\\web\\src\\Models\\Models.csproj",
+        "projectUniqueName": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "E:\\BMSTU\\web\\src\\Models\\Models.csproj",
+        "projectPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\joker\\.nuget\\packages\\",
-        "outputPath": "E:\\BMSTU\\web\\src\\Models\\obj\\",
+        "outputPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joker\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

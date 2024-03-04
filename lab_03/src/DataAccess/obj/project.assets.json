@@ -604,11 +604,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\BMSTU\\web\\src\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "E:\\BMSTU\\web\\src\\DataAccess\\DataAccess.csproj",
+      "projectPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\DataAccess\\DataAccess.csproj",
       "packagesPath": "C:\\Users\\joker\\.nuget\\packages\\",
-      "outputPath": "E:\\BMSTU\\web\\src\\DataAccess\\obj\\",
+      "outputPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\joker\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -625,11 +625,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\BMSTU\\web\\src\\Models\\Models.csproj": {
-              "projectPath": "E:\\BMSTU\\web\\src\\Models\\Models.csproj"
+            "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj": {
+              "projectPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Models\\Models.csproj"
             },
-            "E:\\BMSTU\\web\\src\\Services\\Services.csproj": {
-              "projectPath": "E:\\BMSTU\\web\\src\\Services\\Services.csproj"
+            "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Services\\Services.csproj": {
+              "projectPath": "D:\\BMSTU\\BMSTU-7-sem-Web\\lab_03\\src\\Services\\Services.csproj"
             }
           }
         }
@@ -659,7 +659,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
